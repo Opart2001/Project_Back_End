@@ -205,13 +205,14 @@ app.put('/products/update/:id', async (req, res) => {
         const { id } = req.params;
         const { name, description, type, location, size, quantityInStock, price, imageUrl, isVisible } = req.body;
 
+        // อัปเดตสินค้าโดยใช้ค่าจำนวนที่ส่งมาโดยตรง
         await ProductModel.update({
             name: name,
             description: description,
             type: type,
             location: location,
             size: size,
-            quantityInStock: quantityInStock,
+            quantityInStock: quantityInStock, // ไม่ต้องบวกกับค่าเดิม
             price: price,
             imageUrl: imageUrl,
             isVisible: isVisible
@@ -223,7 +224,10 @@ app.put('/products/update/:id', async (req, res) => {
     } catch (e) {
         res.status(500).send({ message: e.message });
     }
-}); 
+});
+
+
+
 // -------------------------------------------------------------------------------------------------------admin เเก้ไขรายละเอียดข้อมูล
 
 // เพิ่ม API endpoint สำหรับดึงข้อมูลชื่อผู้ใช้
